@@ -1,0 +1,13 @@
+#!/bin/bash
+
+SRC_DIR=$PWD/dotfiles
+DEST_DIR=$HOME
+
+shopt -s dotglob
+for SRC in $SRC_DIR/*
+do
+    DEST=$DEST_DIR/${SRC##*/}
+    if [[ ! -f $DEST && ! -d $DEST && ! -L $DEST ]]; then
+        ln -s -v $SRC $DEST
+    fi
+done
